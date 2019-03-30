@@ -1,5 +1,5 @@
 {
-  "name": "@henrypenton/koa-autorouter",
+  "name": "@henrypenton/autokoa",
   "version": "1.0.0",
   "description": "A very simple site server with EJS support",
   "main": "index.js",
