@@ -1,6 +1,6 @@
 {
   "name": "@henrypenton/koa-autorouter",
-  "version": "10.0.0",
+  "version": "1.0.0",
   "description": "A very simple site server with EJS support",
   "main": "index.js",
   "scripts": {
