@@ -4,7 +4,13 @@ const send = require("koa-send"),
   path = require("path"),
   autorouterSetup = directory => {
     const autorouter = async ctx => {
-      const run = require(directory + "/run.js");
+      let run;
+      if (fileExists(directory, "/run.js")) {
+        run = require(directory + "/run.js");
+      } else {
+        run = require("./run.js");
+      }
+
       const publicFolder = path.join(directory, "/public");
       const viewsFolder = path.join(directory, "/views");
       render(app, {
@@ -18,7 +24,7 @@ const send = require("koa-send"),
         if (ctx.path.length == 1) {
           await ctx.render("index", await run("index", ctx));
         } else {
-          if (!pageExists(viewsFolder, ctx.path + ".html")) {
+          if (!fileExists(viewsFolder, ctx.path + ".html")) {
             await ctx.render("404");
           } else {
             await ctx.render(ctx.path.substr(1), await run(ctx.path));
@@ -35,6 +41,6 @@ const send = require("koa-send"),
 
 module.exports = autorouterSetup;
 
-pageExists = (viewsFolder, page) => {
-  return fs.existsSync(viewsFolder + page);
+fileExists = (folder, page) => {
+  return fs.existsSync(folder + page);
 };
